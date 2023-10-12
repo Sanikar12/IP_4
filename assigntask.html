@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Customize T-shirt</title>
+</head>
+<body>
+    <header>
+<h1>Customize Your Own T-shirts</h1>
+</header>
+
+
+<form id="orderform" onsubmit="return orderPlace();" action="#">
+    <img src="./be-different-landing-page.jpg" height="150" width="400"/><br><br>
+    <label for="name">Name:</label>
+    <input type="text" id="name" name="name" required><br><br>
+
+    <label for="tagline">Tagline on the shirt:</label>
+    <input type="text" id="tagline" name="tagline" required><br><br>
+
+    <label for="color">Color:</label>
+    <input type="color" id="color" name="color" required><br><br>
+
+    <label>Gender:</label>
+    <input type="radio" id="Male" name="gender" value="Male">
+    <label for="Male">Male</label>
+    <input type="radio" id="Female" name="gender" value="Female">
+    <label for="Female">Female</label>
+    <input type="radio" id="Other" name="gender" value="Other">
+    <label for="Other">Other</label><br><br>
+
+    <label for="size">Size:</label>
+    <select id="size" name="size" required>
+        <option value="">Select a size</option>
+        <option value="small">S</option>
+        <option value="medium">M</option>
+        <option value="large">L</option>
+        <option value="extra">XL</option>
+    </select><br><br>
+
+    <label for="quantity">Quantity:</label>
+    <input type="number" id="quantity" name="quantity" min="1" required><br><br>
+
+    <label for="ContactNo">Contact No.:</label>
+    <input type="tel" id="ContactNo" name="ContactNo" pattern="[0-9]{10}" required><br><br>
+
+    <label for="EmailId">Email Id:</label>
+    <input type="email" id="EmailId" placeholder="abc@gmail.com" name="EmailId" required><br><br>
+
+    <label for="Address">Address:</label><br>
+    <textarea id="Address" name="Address" rows="4" cols="50"></textarea><br>
+
+    <input type="submit" value="Place Order">
+</form>
+
+<div id="receipt" style="display: none;">
+    <h2>Order Receipt</h2>
+    <p id="receiptDate">Date of Receipt:</p>
+    <p id="receiptName">Name: </p>
+    <p id="receiptEmail">Email:</p>
+    <p id="receiptSize">T-Shirt Size:</p>
+    <p id="receiptColor">T-Shirt Color: </p>
+    <p id="receiptText">Tagline: </p>
+    <p id="receiptQuantity">Quantity: </p>
+    <p id="receiptContactNo">Contact No: </p>
+    <p id="receiptAddress">Address: </p>
+</div>
+
+<script>
+    function orderPlace() {
+        const tag = document.getElementById("tagline");
+        const mobno = document.getElementById("ContactNo");
+
+        if (tag.value.length > 50) {
+            alert("Tagline should not exceed 50 characters");
+            return false;
+        }
+
+        if (mobno.value.length !== 10) {
+            alert("Invalid Contact no.");
+            return false;
+        }
+
+        showReceipt();
+        return false;
+    }
+
+    function showReceipt() {
+        const receiptDate = new Date().toLocaleString();
+        document.getElementById("receipt").style.display = "block";
+
+        document.getElementById("receiptDate").textContent = "Date of Receipt: " + receiptDate;
+        document.getElementById("receiptName").textContent = "Name: " + document.getElementById("name").value;
+        document.getElementById("receiptEmail").textContent = "Email: " + document.getElementById("EmailId").value;
+        document.getElementById("receiptSize").textContent = "T-Shirt Size: " + document.getElementById("size").value;
+        document.getElementById("receiptColor").textContent = "T-Shirt Color: " + document.getElementById("color").value;
+        document.getElementById("receiptText").textContent = "Tagline: " + document.getElementById("tagline").value;
+        document.getElementById("receiptQuantity").textContent = "Quantity: " + document.getElementById("quantity").value;
+        document.getElementById("receiptContactNo").textContent = "Contact No: " + document.getElementById("ContactNo").value;
+        document.getElementById("receiptAddress").textContent = "Address: " + document.getElementById("Address").value;
+
+        document.getElementById("receipt").style.display = "block";
+        document.getElementById("orderform").style.display = "none";
+    }
+</script>
+</body>
+</html>
